@@ -1,7 +1,7 @@
 #topbar
 {
     background: rgba(0,0,0,0.5);
-    color:#fff;
+    color:darkred;
     font-size: 14px;
 
     text-align: right;
@@ -46,7 +46,7 @@
 }
 .mavi-back
 {
-    background: #0085A1;
+    background: #1c7430;
 }
 
 nav .dropdown-menu
@@ -95,4 +95,10 @@ li.divider
     display: block !important;
     background-color: #333 !important;
 
+}
+ul
+{
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 15px;
 }

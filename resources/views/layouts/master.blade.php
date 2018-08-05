@@ -26,7 +26,56 @@
 <body>
 
 <!-- Navigation -->
+
+
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+
+    <div class="container" id="topbar">
+        <div class="row right">
+            <div class="col-md-12">
+                <ul >
+                    <li><a href="/"><i class="fa fa-home"></i>Ana Sayfa</a></li>
+                    @if(Auth::guest())
+                        <li><a href="/login" class="uyelik-tus"><i class="fa fa-sign-in"></i> Üye Girişi</a></li>
+                        <li><a href="/register" class="uyelik-tus"><i class="fa fa-users"></i> Üye Ol</a></li>
+                    @else
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                @if(Auth::user()->yetkisi_var_mi("admin"))
+                                    <li><a href="{{ url('/site-ayarlari') }}"><i class="fa fa-btn fa-wrench"></i>Site Ayarları</a></li>
+                                    <li><a href="{{ url('/user') }}"><i class="fa fa-btn fa-users"></i>Kullanıcılar</a></li>
+                                    <li><a href="{{ url('/kategori') }}"><i class="fa fa-btn fa-cube"></i>Kategoriler</a></li>
+                                    <li><a href="{{ url('/makale') }}"><i class="fa fa-btn fa-list-ol"></i>Tüm Makaleler</a></li>
+                                    <li><a href="{{ url('/talep') }}"><i class="fa fa-btn fa-envelope-o"></i>Yazarlık Talepleri</a></li>
+                                    <li class="divider"></li>
+                                @endif
+                                @if(Auth::user()->yetkisi_var_mi("author"))
+                                    <li><a href="{{ url('/makalem') }}"><i class="fa fa-btn fa-list"></i>Makalelerim</a></li>
+                                    <li><a href="{{ url('/makalem/create') }}"><i class="fa fa-btn fa-plus"></i>Yeni Makale Ekle</a></li>
+                                @endif
+                                @if(!Auth::user()->yetkisi_var_mi("admin") && !Auth::user()->yetkisi_var_mi("author"))
+                                    <li><a href="{{ url('/yazarlik-talebi') }}"><i class="fa fa-btn fa-envelope"></i>Yazarlık Talebi</a></li>
+                                @endif
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Çıkış</a></li>
+
+
+
+                            </ul>
+                        </li>
+                    @endif
+                </ul>
+
+
+            </div>
+
+            </div>
+        </div>
+
+
     <div class="container">
         <a class="navbar-brand" href="index.html">Start Bootstrap</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,6 +100,8 @@
         </div>
     </div>
 </nav>
+
+
 
 @yield('content')
 

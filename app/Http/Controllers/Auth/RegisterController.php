@@ -68,5 +68,12 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-    }
+        
+      /* DB::table("role_user")->insert(["role_id" =>3,"user_id"=>$user->id]);
+       
+       return $user;*/
+       
+       
+       
+}
 }
