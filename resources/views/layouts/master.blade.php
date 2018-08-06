@@ -8,7 +8,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Clean Blog - Start Bootstrap Theme</title>
+    <title> Welcome  @if(Auth::guest())
+            Guest
+        @else
+            {{ Auth::user()->name }}
+
+        @endif </title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset("vendor/bootstrap/css/bootstrap.min.css")}}" rel="stylesheet">
@@ -28,56 +33,13 @@
 <!-- Navigation -->
 
 
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-
-    <div class="container" id="topbar">
-        <div class="row right">
-            <div class="col-md-12">
-                <ul >
-                    <li><a href="/"><i class="fa fa-home"></i>Ana Sayfa</a></li>
-                    @if(Auth::guest())
-                        <li><a href="/login" class="uyelik-tus"><i class="fa fa-sign-in"></i> Üye Girişi</a></li>
-                        <li><a href="/register" class="uyelik-tus"><i class="fa fa-users"></i> Üye Ol</a></li>
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                @if(Auth::user()->yetkisi_var_mi("admin"))
-                                    <li><a href="{{ url('/site-ayarlari') }}"><i class="fa fa-btn fa-wrench"></i>Site Ayarları</a></li>
-                                    <li><a href="{{ url('/user') }}"><i class="fa fa-btn fa-users"></i>Kullanıcılar</a></li>
-                                    <li><a href="{{ url('/kategori') }}"><i class="fa fa-btn fa-cube"></i>Kategoriler</a></li>
-                                    <li><a href="{{ url('/makale') }}"><i class="fa fa-btn fa-list-ol"></i>Tüm Makaleler</a></li>
-                                    <li><a href="{{ url('/talep') }}"><i class="fa fa-btn fa-envelope-o"></i>Yazarlık Talepleri</a></li>
-                                    <li class="divider"></li>
-                                @endif
-                                @if(Auth::user()->yetkisi_var_mi("author"))
-                                    <li><a href="{{ url('/makalem') }}"><i class="fa fa-btn fa-list"></i>Makalelerim</a></li>
-                                    <li><a href="{{ url('/makalem/create') }}"><i class="fa fa-btn fa-plus"></i>Yeni Makale Ekle</a></li>
-                                @endif
-                                @if(!Auth::user()->yetkisi_var_mi("admin") && !Auth::user()->yetkisi_var_mi("author"))
-                                    <li><a href="{{ url('/yazarlik-talebi') }}"><i class="fa fa-btn fa-envelope"></i>Yazarlık Talebi</a></li>
-                                @endif
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Çıkış</a></li>
+<nav class="bg bg-secondary navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
 
 
-
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
-
-
-            </div>
-
-            </div>
-        </div>
 
 
     <div class="container">
-        <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+        <a class="navbar-brand" href="/">Sezer Esim Blog</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fa fa-bars"></i>
@@ -85,7 +47,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="about.html">About</a>
@@ -96,8 +58,48 @@
                 <li class="nav-item">
                     <a class="nav-link" href="contact.html">Contact</a>
                 </li>
+                @if(Auth::guest())
+                    <li><a href="/login" class="nav-link"><i class="fa fa-sign-in"></i> Üye Girişi</a></li>
+                    <li><a href="/register" class="nav-link"><i class="fa fa-users"></i> Üye Ol</a></li>
+                @endif
             </ul>
+
         </div>
+        @if(!Auth::guest())
+        <div class="dropdown">
+
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a href="/"><i class="fa fa-home"></i> {{ Auth::user()->name }}</a>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li class="dropdown">
+
+                @if(Auth::user()->yetkisi_var_mi("admin"))
+                            <a href="{{ url('/site-ayarlari') }}" class="dropdown-item"><i class="fa fa-btn fa-wrench"></i>Site Ayarları</a>
+                            <a href="{{ url('/user') }}"class="dropdown-item"><i class="fa fa-btn fa-users"></i>Kullanıcılar</a>
+                            <a href="{{ url('/kategori') }}"class="dropdown-item"><i class="fa fa-btn fa-cube"></i>Kategoriler</a>
+                            <a href="{{ url('/makale') }}"class="dropdown-item"><i class="fa fa-btn fa-list-ol"></i>Tüm Makaleler</a>
+                            <a href="{{ url('/talep') }}"class="dropdown-item"><i class="fa fa-btn fa-envelope-o"></i>Yazarlık Talepleri</a>
+                        <div class="dropdown-divider"></div>
+                        @endif
+                        @if(Auth::user()->yetkisi_var_mi("author"))
+                            <a href="{{ url('/makalem') }}"class="dropdown-item"><i class="fa fa-btn fa-list"></i>Makalelerim</a>
+                            <a href="{{ url('/makalem/create') }}"class="dropdown-item"><i class="fa fa-btn fa-plus"></i>Yeni Makale Ekle</a>
+                        @endif
+                        @if(!Auth::user()->yetkisi_var_mi("admin") && !Auth::user()->yetkisi_var_mi("author"))
+                            <a href="{{ url('/yazarlik-talebi') }}"class="dropdown-item"><i class="fa fa-btn fa-envelope"></i>Yazarlık Talebi</a>
+                        @endif
+                    <div class="dropdown-divider"></div>
+                        <a href="{{ url('/logout') }}"class="dropdown-item"><i class="fa fa-btn fa-sign-out"></i>Çıkış</a>
+
+
+
+
+                </li>
+            </div>
+
+        </div>@endif
+
     </div>
 </nav>
 
