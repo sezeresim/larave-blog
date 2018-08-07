@@ -28,6 +28,10 @@
     <!-- Custom styles for this template -->
     <link href="{{asset("css/clean-blog.min.css")}}" rel="stylesheet">
 
+    <script>
+        window.csrfToken = "{{ csrf_token() }}"
+    </script>
+
 </head>
 
 <body>
