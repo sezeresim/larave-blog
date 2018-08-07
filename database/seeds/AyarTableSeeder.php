@@ -12,7 +12,7 @@ class AyarTableSeeder extends Seeder
      */
     public function run()
     {
-        Ayar::create(["name"=>"baslik","value"=>"Yazılım Dünyası"]);
+        Ayar::create(["name"=>"title","value"=>"Yazılım Dünyası"]);
         Ayar::create(["name"=>"author","value"=>"Sezer Esim"]);
         Ayar::create(["name"=>"description","value"=>"Az ye çok çalış"]);
         Ayar::create(["name"=>"keywords","value"=>"yazılım,php,java"]);

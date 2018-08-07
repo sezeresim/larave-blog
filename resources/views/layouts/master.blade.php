@@ -5,15 +5,17 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="{!! config("ayarlar.description") !!}">
+    <meta name="keywords" content="{!! config("ayarlar.keywords") !!}"   >
+    <meta name="author" content="{!! config("ayarlar.author") !!}">
 
-    <title> Welcome  @if(Auth::guest())
-            Guest
+    <title>
+        @if(Auth::guest())
+                  {!! config("ayarlar.baslik") !!}
         @else
-            {{ Auth::user()->name }}
-
-        @endif </title>
+            Welcome {{ Auth::user()->name }}
+        @endif
+    </title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset("vendor/bootstrap/css/bootstrap.min.css")}}" rel="stylesheet">
@@ -33,12 +35,13 @@
 <!-- Navigation -->
 
 
-<nav class="bg bg-secondary navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+<nav class="bg bg-dark navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
 
 
 
 
     <div class="container">
+
         <a class="navbar-brand" href="/">Sezer Esim Blog</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
