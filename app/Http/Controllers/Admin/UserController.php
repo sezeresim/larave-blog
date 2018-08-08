@@ -129,6 +129,6 @@ class UserController extends Controller
     {
         User::destroy($id);
         Session::flash('message', "Silindi");
-        return back();
+        return redirect("/user");
     }
 }

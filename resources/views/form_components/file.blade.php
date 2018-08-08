@@ -1,5 +1,6 @@
 <div class="form-group {{ $errors->has($name) ? ' has-error' : '' }}">
     {{ Form::label($name, $label_name, ['class' => 'control-label']) }}
+    <br>
     {{ Form::file($name) }}
     @if ($errors->has($name))
         <span class="help-block">
